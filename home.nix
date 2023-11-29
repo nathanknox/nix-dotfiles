@@ -110,8 +110,6 @@
     enable = true;
     enableAutosuggestions= true;
     enableCompletion = true;
-    # defaultKeymap = "viins";
-    # initExtra = "bindkey -v\nbindkey -M viins 'jk' vi-cmd-mode";
     initExtra = ''
       source ${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
     '';
