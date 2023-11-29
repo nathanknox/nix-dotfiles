@@ -22,7 +22,7 @@
     # # "Hello, world!" when run.
     # pkgs.hello
     pkgs.bat
-    pkgs.tmux
+    pkgs.tree
     pkgs.ripgrep
     pkgs.glow
 
@@ -71,33 +71,10 @@
   };
 
   # Let Home Manager install and manage itself.
+  # I'm pretty sure this needs to change with `nix-darwin` or `nixOS` installs
   programs.home-manager.enable = true;
 
   # My packages:
-  programs.helix = {
-    enable = true;
-    defaultEditor = true;
-    extraPackages = [ pkgs.marksman ];
-  };
-
-  programs.zsh = {
-    enable = true;
-    enableAutosuggestions= true;
-    enableCompletion = true;
-    defaultKeymap = "vicmd";
-    shellAliases = {
-      ll = "ls -lh";
-      please = "sudo";
-    };
-    syntaxHighlighting.enable = true;
-    syntaxHighlighting.highlighters = [ "main" ];
-  };
-
-  programs.starship = {
-    enable = true;
-    enableZshIntegration = true;
-  };
-
   # alacritty - a cross-platform, GPU-accelerated terminal emulator
   programs.alacritty = {
     enable = false;
@@ -111,5 +88,38 @@
       scrolling.multiplier = 5;
       selection.save_to_clipboard = true;
     };
+  };
+  programs.direnv = {
+    enable = true;
+    enableZshIntegration = true;
+    nix-direnv.enable = true;
+  };
+  programs.helix = {
+    enable = true;
+    defaultEditor = true;
+    extraPackages = [ pkgs.marksman pkgs.nil ];
+  };
+  programs.starship = {
+    enable = true;
+    enableZshIntegration = true;
+  };
+  programs.tmux = {
+    enable = true;
+  };
+  programs.zsh = {
+    enable = true;
+    enableAutosuggestions= true;
+    enableCompletion = true;
+    # defaultKeymap = "viins";
+    # initExtra = "bindkey -v\nbindkey -M viins 'jk' vi-cmd-mode";
+    initExtra = ''
+      source ${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+    '';
+    shellAliases = {
+      ll = "ls -lh";
+      please = "sudo";
+    };
+    syntaxHighlighting.enable = true;
+    syntaxHighlighting.highlighters = [ "main" ];
   };
 }
