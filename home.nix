@@ -21,6 +21,10 @@
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
     # pkgs.hello
+    pkgs.bat
+    pkgs.tmux
+    pkgs.ripgrep
+    pkgs.glow
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
@@ -68,4 +72,44 @@
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
+
+  # My packages:
+  programs.helix = {
+    enable = true;
+    defaultEditor = true;
+    extraPackages = [ pkgs.marksman ];
+  };
+
+  programs.zsh = {
+    enable = true;
+    enableAutosuggestions= true;
+    enableCompletion = true;
+    defaultKeymap = "vicmd";
+    shellAliases = {
+      ll = "ls -lh";
+      please = "sudo";
+    };
+    syntaxHighlighting.enable = true;
+    syntaxHighlighting.highlighters = [ "main" ];
+  };
+
+  programs.starship = {
+    enable = true;
+    enableZshIntegration = true;
+  };
+
+  # alacritty - a cross-platform, GPU-accelerated terminal emulator
+  programs.alacritty = {
+    enable = false;
+    # custom settings
+    settings = {
+      env.TERM = "xterm-256color";
+      font = {
+        size = 12;
+        draw_bold_text_with_bright_colors = true;
+      };
+      scrolling.multiplier = 5;
+      selection.save_to_clipboard = true;
+    };
+  };
 }
