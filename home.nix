@@ -94,6 +94,14 @@
     enableZshIntegration = true;
     nix-direnv.enable = true;
   };
+  programs.git = {
+    enable = true; 
+    userName = "Nathan Knox";
+    userEmail = "nathan.knox@gmail.com";
+  };
+  programs.gitui = {
+    enable = true;
+  };
   programs.helix = {
     enable = true;
     defaultEditor = true;
@@ -103,9 +111,19 @@
     enable = true;
     enableZshIntegration = true;
   };
-  programs.tmux = {
-    enable = true;
+  programs.thefuck = {
+    enable = false;
+    enableZshIntegration = true;
+    enableInstantMode = true;
   };
+  programs.tmux = {
+    clock24 = true;
+    enable = true;
+    keyMode = "vi";
+    shell = "${pkgs.zsh}/bin/zsh";
+    terminal = "screen-256color";
+  };
+  programs.tmate.enable = true;
   programs.zsh = {
     enable = true;
     enableAutosuggestions= true;
