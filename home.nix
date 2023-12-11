@@ -21,6 +21,10 @@
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
     # pkgs.hello
+    pkgs.bat
+    pkgs.tree
+    pkgs.ripgrep
+    pkgs.glow
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
@@ -67,5 +71,75 @@
   };
 
   # Let Home Manager install and manage itself.
+  # I'm pretty sure this needs to change with `nix-darwin` or `nixOS` installs
   programs.home-manager.enable = true;
+
+  # My packages:
+  # alacritty - a cross-platform, GPU-accelerated terminal emulator
+  programs.alacritty = {
+    enable = false;
+    # custom settings
+    settings = {
+      env.TERM = "xterm-256color";
+      font = {
+        size = 12;
+        draw_bold_text_with_bright_colors = true;
+      };
+      scrolling.multiplier = 5;
+      selection.save_to_clipboard = true;
+    };
+  };
+  programs.direnv = {
+    enable = true;
+    enableZshIntegration = true;
+    nix-direnv.enable = true;
+  };
+  programs.git = {
+    enable = true; 
+    userName = "Nathan Knox";
+    userEmail = "nathan.knox@gmail.com";
+  };
+  programs.gh = {
+    enable = true;
+    
+  };
+  programs.gitui = {
+    enable = true;
+  };
+  programs.helix = {
+    enable = true;
+    defaultEditor = true;
+    extraPackages = [ pkgs.marksman pkgs.nil ];
+  };
+  programs.starship = {
+    enable = true;
+    enableZshIntegration = true;
+  };
+  programs.thefuck = {
+    enable = false;
+    enableZshIntegration = true;
+    enableInstantMode = true;
+  };
+  programs.tmux = {
+    clock24 = true;
+    enable = true;
+    keyMode = "vi";
+    shell = "${pkgs.zsh}/bin/zsh";
+    terminal = "screen-256color";
+  };
+  programs.tmate.enable = true;
+  programs.zsh = {
+    enable = true;
+    enableAutosuggestions= true;
+    enableCompletion = true;
+    initExtra = ''
+      source ${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+    '';
+    shellAliases = {
+      ll = "ls -lh";
+      please = "sudo";
+    };
+    syntaxHighlighting.enable = true;
+    syntaxHighlighting.highlighters = [ "main" ];
+  };
 }
