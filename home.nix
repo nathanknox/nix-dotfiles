@@ -99,6 +99,10 @@
     userName = "Nathan Knox";
     userEmail = "nathan.knox@gmail.com";
   };
+  programs.gh = {
+    enable = true;
+    
+  };
   programs.gitui = {
     enable = true;
   };
