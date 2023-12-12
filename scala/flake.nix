@@ -4,20 +4,17 @@
   # Flake inputs
   inputs = {
     nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0.2305.491812.tar.gz";
-    bleepSrc.url = "github:KristianAN/bleep-flake";
   };
 
   # Flake outputs
-  outputs = { self, nixpkgs, bleepSrc }:
+  outputs = { self, nixpkgs }:
     let
       # Overlays enable you to customize the Nixpkgs attribute set
       overlays = [
-        (self: super:
-          let jdk = super.openjdk17; 
-          in
+        (final: prev:
+          let jdk = prev.openjdk17; in
           # sets jre/jdk overrides that use the openjdk17 package
           {
-            bleep = bleepSrc.defaultPackage.${super.system};
             jre = jdk;
             inherit jdk;
           })
@@ -44,9 +41,12 @@
           packages = with pkgs; [
             # Uses the JRE/JDK version set up by the overlay.
             sbt
-            bleep
             metals
           ];
+
+          shellHook = ''
+            export JAVA_HOME="${pkgs.jre}"
+          '';
         };
       });
     };
