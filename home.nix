@@ -113,6 +113,7 @@
   };
   programs.nushell = {
     enable = true;
+    extraConfig = "$env.config = {edit_mode: vi}";
   };
   programs.starship = {
     enable = true;
@@ -131,6 +132,7 @@
     terminal = "screen-256color";
   };
   programs.tmate.enable = true;
+  programs.zellij.enable = true;
   programs.zsh = {
     enable = false;
     enableAutosuggestions= true;
