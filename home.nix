@@ -111,9 +111,12 @@
     defaultEditor = true;
     extraPackages = [ pkgs.marksman pkgs.nil ];
   };
+  programs.nushell = {
+    enable = true;
+  };
   programs.starship = {
     enable = true;
-    enableZshIntegration = true;
+    enableNushellIntegration= true;
   };
   programs.thefuck = {
     enable = false;
