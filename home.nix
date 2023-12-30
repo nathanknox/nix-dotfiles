@@ -132,7 +132,7 @@
   };
   programs.tmate.enable = true;
   programs.zsh = {
-    enable = true;
+    enable = false;
     enableAutosuggestions= true;
     enableCompletion = true;
     initExtra = ''
