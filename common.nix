@@ -67,7 +67,6 @@
   };
 
   # Let Home Manager install and manage itself.
-  # I'm pretty sure this needs to change with `nix-darwin` or `nixOS` installs
   programs.home-manager.enable = true;
 
   # My packages:
