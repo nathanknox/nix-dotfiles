@@ -134,18 +134,4 @@
   };
   programs.tmate.enable = true;
   programs.zellij.enable = true;
-  programs.zsh = {
-    enable = false;
-    enableAutosuggestions= true;
-    enableCompletion = true;
-    initExtra = ''
-      source ${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
-    '';
-    shellAliases = {
-      ll = "ls -lh";
-      please = "sudo";
-    };
-    syntaxHighlighting.enable = true;
-    syntaxHighlighting.highlighters = [ "main" ];
-  };
 }
