@@ -33,7 +33,7 @@
           username = "nathan.knox";
           homeDirectory = "/Users/nathan.knox";
         };
-        pkgs = pkgsForSystem "x86-64-darwin";
+        pkgs = pkgsForSystem "x86_64-darwin";
         modules = [ ./laptop.nix ./common.nix ];
       };
     };
