@@ -25,6 +25,7 @@
     pkgs.tree
     pkgs.ripgrep
     pkgs.glow
+    pkgs.pomodoro
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
