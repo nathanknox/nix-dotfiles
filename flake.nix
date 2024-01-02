@@ -12,18 +12,17 @@
 
   outputs = { nixpkgs, home-manager, ... }:
     let
-      system = "x86_64-linux";
-      pkgs = nixpkgs.legacyPackages.${system};
       pkgsForSystem = system: import nixpkgs {
         inherit system;
       };
 
     in {
       homeConfigurations."nknox" = home-manager.lib.homeManagerConfiguration {
-        system = "x86_64-linux";
-        username = "nknox";
-        homeDirectory = "/home/nknox";
-        pkgs = pkgsForSystem system;
+        extraSpecialArgs = {
+          username = "nknox";
+          homeDirectory = "/home/nknox";
+        };
+        pkgs = pkgsForSystem "x86_64-linux";
 
         # Specify your home configuration modules here, for example,
         # the path to your home.nix.
@@ -33,10 +32,12 @@
         # to pass through arguments to home.nix
       };
       homeConfigurations.laptop = home-manager.lib.homeManagerConfiguration {
-        system = "x86-64-darwin";
-        username = "nathan.knox";
-        homeDirectory = "/Users/nathan.knox";
-        pkgs = pkgsForSystem system;
+        extraSpecialArgs = {
+          username = "nathan.knox";
+          homeDirectory = "/Users/nathan.knox";
+        };
+        pkgs = pkgsForSystem "x86-64-darwin";
         modules = [ ./home.nix ];
       };
+    };
 }
