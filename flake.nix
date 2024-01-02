@@ -17,19 +17,16 @@
       };
 
     in {
-      homeConfigurations."nknox" = home-manager.lib.homeManagerConfiguration {
-        extraSpecialArgs = {
-          username = "nknox";
-          homeDirectory = "/home/nknox";
-        };
+      homeConfigurations.desktop = home-manager.lib.homeManagerConfiguration {
+        extraSpecialArgs = { };
         pkgs = pkgsForSystem "x86_64-linux";
 
         # Specify your home configuration modules here, for example,
         # the path to your home.nix.
-        modules = [ ./home.nix ];
+        modules = [ ./desktop.nix ./common.nix ];
 
         # Optionally use extraSpecialArgs
-        # to pass through arguments to home.nix
+        # to pass through arguments to common.nix
       };
       homeConfigurations.laptop = home-manager.lib.homeManagerConfiguration {
         extraSpecialArgs = {
@@ -37,7 +34,7 @@
           homeDirectory = "/Users/nathan.knox";
         };
         pkgs = pkgsForSystem "x86-64-darwin";
-        modules = [ ./home.nix ];
+        modules = [ ./laptop.nix ./common.nix ];
       };
     };
 }
