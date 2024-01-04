@@ -43,6 +43,7 @@
             terraformer
             terraform-landscape
             terraform-ls
+            azure-cli
           ];
         };
       });
