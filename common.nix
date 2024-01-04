@@ -86,7 +86,7 @@
   };
   programs.broot = {
     enable = true;
-    settings.modal = true;
+    settings.modal = false;
   };
   programs.direnv = {
     enable = true;
