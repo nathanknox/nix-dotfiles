@@ -109,7 +109,7 @@
   };
   programs.nushell = {
     enable = true;
-    extraConfig = "$env.config = {edit_mode: vi}";
+    extraConfig = "$env.config = {edit_mode: vi,\nshow_banner: false}";
   };
   programs.starship = {
     enable = true;
