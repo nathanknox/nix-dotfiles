@@ -41,7 +41,6 @@
           packages = with pkgs; [
             terraform
             terraformer
-            terraform-landscape
             terraform-ls
             azure-cli
           ];
