@@ -111,12 +111,12 @@
     extraPackages = [ pkgs.marksman pkgs.nil ];
   };
   programs.nushell = {
-    enable = true;
+    enable = false;
     extraConfig = "$env.config = {edit_mode: vi,\nshow_banner: false}";
   };
   programs.starship = {
     enable = true;
-    enableNushellIntegration= true;
+    enableZshIntegration = true;
   };
   programs.thefuck = {
     enable = false;
@@ -132,4 +132,14 @@
   };
   programs.tmate.enable = true;
   programs.zellij.enable = true;
+  programs.zsh = {
+    enable = true;
+    defaultKeymap = "viins";
+    enableCompletion = true;
+    enableAutosuggestions = true;
+    syntaxHighlighting.enable = true;
+    shellAliases = {
+      ll = "ls -l";
+    };
+  };
 }
