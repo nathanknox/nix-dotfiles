@@ -111,6 +111,9 @@
     defaultEditor = true;
     extraPackages = [ pkgs.marksman pkgs.nil ];
   };
+  programs.neovim = {
+    enable = true;
+  };
   programs.nushell = {
     enable = false;
     extraConfig = "$env.config = {edit_mode: vi,\nshow_banner: false}";
