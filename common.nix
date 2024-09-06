@@ -107,7 +107,7 @@
     enable = true;
   };
   programs.helix = {
-    enable = true;
+    enable = false;
     defaultEditor = true;
     extraPackages = [ pkgs.marksman pkgs.nil ];
   };
