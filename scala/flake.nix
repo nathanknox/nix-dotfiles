@@ -42,6 +42,7 @@
             # Uses the JRE/JDK version set up by the overlay.
             sbt
             metals
+            coursier
           ];
 
           shellHook = ''

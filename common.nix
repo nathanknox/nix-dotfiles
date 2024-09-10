@@ -104,7 +104,7 @@
     enable = true;
   };
   programs.helix = {
-    enable = true;
+    enable = false;
     defaultEditor = true;
     extraPackages = [ pkgs.marksman pkgs.nil ];
   };
@@ -137,7 +137,7 @@
     enable = true;
     defaultKeymap = "viins";
     enableCompletion = true;
-    enableAutosuggestions = true;
+    autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
     shellAliases = {
       ll = "ls -l";
