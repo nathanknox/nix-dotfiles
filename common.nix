@@ -18,7 +18,9 @@
     pkgs.tree
     pkgs.ripgrep
     pkgs.glow
+    pkgs.skate
     pkgs.httpie
+    pkgs.nodePackages.npm
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
@@ -142,5 +144,6 @@
     shellAliases = {
       ll = "ls -l";
     };
+    initExtra = "export PATH=$PATH:/Users/nathan.knox/.pulumi/bin";
   };
 }
