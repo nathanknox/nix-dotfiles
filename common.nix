@@ -100,7 +100,6 @@
   };
   programs.gh = {
     enable = true;
-    
   };
   programs.gitui = {
     enable = true;
@@ -110,12 +109,11 @@
     defaultEditor = true;
     extraPackages = [ pkgs.marksman pkgs.nil ];
   };
-  programs.neovim = {
+  programs.lazygit = {
     enable = true;
   };
-  programs.nushell = {
-    enable = false;
-    extraConfig = "$env.config = {edit_mode: vi,\nshow_banner: false}";
+  programs.neovim = {
+    enable = true;
   };
   programs.starship = {
     enable = true;
@@ -126,14 +124,9 @@
     enableZshIntegration = true;
     enableInstantMode = true;
   };
-  programs.tmux = {
-    clock24 = true;
+  programs.vscode = {
     enable = true;
-    keyMode = "vi";
-    shell = "${pkgs.zsh}/bin/zsh";
-    terminal = "screen-256color";
   };
-  programs.tmate.enable = true;
   programs.zellij.enable = true;
   programs.zsh = {
     enable = true;
@@ -142,7 +135,7 @@
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
     shellAliases = {
-      ll = "ls -l";
+      ll = "ls -la";
     };
     initExtra = "export PATH=$PATH:/Users/nathan.knox/.pulumi/bin";
   };
