@@ -115,6 +115,15 @@
     enable = false;
     extraConfig = "$env.config = {edit_mode: vi,\nshow_banner: false}";
   };
+  # OpenCode global skills. Sourced from the repo so they are version-controlled
+  # and reproducible across machines. The caveman skill is a communication mode;
+  # see dotfiles/opencode/skills/caveman/SKILL.md for its behavior and triggers.
+  # recursive = true symlinks each file individually, leaving the skills/
+  # directory itself writable so opencode can drop in ad-hoc skills alongside.
+  xdg.configFile."opencode/skills/caveman" = {
+    source = ./dotfiles/opencode/skills/caveman;
+    recursive = true;
+  };
   programs.starship = {
     enable = true;
     enableZshIntegration = true;
