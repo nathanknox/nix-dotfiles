@@ -1,0 +1,55 @@
+wtf:
+  colors:
+    border:
+      focusable: darkslateblue
+      focused: orange
+      normal: gray
+  grid:
+    columns: [40, 40]
+    rows: [10, 10, 10]
+  refreshInterval: 1
+  mods:
+    clocks:
+      enabled: true
+      locations:
+        UTC: "Etc/UTC"
+        Local: "America/New_York"
+      position:
+        top: 0
+        left: 0
+        height: 1
+        width: 1
+      refreshInterval: 15
+      sort: alphabetical
+      type: clocks
+    git:
+      enabled: true
+      commitCount: 10
+      position:
+        top: 0
+        left: 1
+        height: 2
+        width: 1
+      refreshInterval: 30
+      repositories:
+        - "/Users/nathan.knox/code/trowel"
+        - "/Users/nathan.knox/code/nix-dotfiles"
+      type: git
+    resourceusage:
+      enabled: true
+      position:
+        top: 1
+        left: 0
+        height: 1
+        width: 1
+      refreshInterval: 5
+      type: resourceusage
+    todo:
+      enabled: true
+      checkedIcon: "X"
+      position:
+        top: 2
+        left: 0
+        height: 1
+        width: 2
+      type: todo

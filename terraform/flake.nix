@@ -3,7 +3,7 @@
 
   # Flake inputs
   inputs = {
-    nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0.2405.634968.tar.gz";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
   };
 
   # Flake outputs
@@ -43,6 +43,7 @@
             terraformer
             terraform-ls
             azure-cli
+            tflint
           ];
         };
       });
