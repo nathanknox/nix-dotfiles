@@ -62,6 +62,11 @@
   #
   home.sessionVariables = {
     # EDITOR = "vim";
+    # Pin gh's config dir to the real ~/.config/gh. gh honors XDG_CONFIG_HOME,
+    # but ucode/opencode redirect XDG_CONFIG_HOME to ~/.ucode/opencode-xdg for
+    # their children, which makes gh look in the wrong place and appear logged
+    # out. Setting GH_CONFIG_DIR explicitly overrides that everywhere.
+    GH_CONFIG_DIR = "${config.home.homeDirectory}/.config/gh";
   };
 
   # Let Home Manager install and manage itself.
