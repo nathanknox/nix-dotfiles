@@ -1,0 +1,8 @@
+/* matugen TEMPLATE (Route B). Rendered to ~/.config/waybar/colors.css.
+   @import this from your waybar style and reference the @define-color vars.
+   To use: on Route B, replace the inline registry colors in waybar.nix's
+   style with `@import "colors.css";` and these variable names. */
+@define-color background {{colors.surface.default.hex}};
+@define-color foreground {{colors.on_surface.default.hex}};
+@define-color accent {{colors.primary.default.hex}};
+@define-color surface {{colors.surface_container.default.hex}};

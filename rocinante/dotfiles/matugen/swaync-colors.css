@@ -1,0 +1,5 @@
+/* matugen TEMPLATE (Route B). Rendered to ~/.config/swaync/colors.css.
+   swaync (the notification center saneaspect themes) imports this. */
+@define-color background {{colors.surface.default.hex}};
+@define-color foreground {{colors.on_surface.default.hex}};
+@define-color accent {{colors.primary.default.hex}};

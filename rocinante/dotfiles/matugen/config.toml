@@ -1,0 +1,31 @@
+# =============================================================================
+# matugen/config.toml — ROUTE B (saneaspect Material-You) matugen templates.
+# =============================================================================
+#
+# INERT by default. Only used if you enable the matugen theme route (see
+# modules/home-manager/theme-matugen.nix). matugen reads a wallpaper, derives a
+# Material-You palette, and renders each [templates.*] below to `output_path`.
+#
+# This mirrors saneaspect/theme-switcher: a matugen config that fans generated
+# colors out to waybar, hyprland, and swaync. Edit these templates freely (they
+# are plaintext, hot-editable like the hypr dotfiles).
+
+[config]
+# Reload apps after generation so colors apply live.
+[config.reload_apps]
+waybar = true
+
+# --- Hyprland colors (mirrors what theme.nix generates on Route A) -----------
+[templates.hyprland]
+input_path = "~/code/nix-dotfiles/rocinante/dotfiles/matugen/hyprland-colors.conf"
+output_path = "~/.config/hypr/colors.conf"
+
+# --- Waybar colors -----------------------------------------------------------
+[templates.waybar]
+input_path = "~/code/nix-dotfiles/rocinante/dotfiles/matugen/waybar-colors.css"
+output_path = "~/.config/waybar/colors.css"
+
+# --- swaync colors -----------------------------------------------------------
+[templates.swaync]
+input_path = "~/code/nix-dotfiles/rocinante/dotfiles/matugen/swaync-colors.css"
+output_path = "~/.config/swaync/colors.css"
