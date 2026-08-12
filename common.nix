@@ -230,6 +230,13 @@
     source = ./dotfiles/opencode/skills/caveman;
     recursive = true;
   };
+  # smart-brevify: rewrites durable artifacts into Smart Brevity. Vendored the
+  # same way as caveman so it is version-controlled and reproducible rather than
+  # a hand-made symlink into an out-of-repo checkout.
+  xdg.configFile."opencode/skills/smart-brevify" = {
+    source = ./dotfiles/opencode/skills/smart-brevify;
+    recursive = true;
+  };
   programs.starship = {
     enable = true;
     enableZshIntegration = true;
