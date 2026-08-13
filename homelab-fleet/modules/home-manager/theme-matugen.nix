@@ -52,7 +52,7 @@ lib.mkIf (os.graphical.enable && os.theme.matugen.enable) {
   #
   # xdg.configFile."matugen/config.toml".source =
   #   config.lib.file.mkOutOfStoreSymlink
-  #     "${config.home.homeDirectory}/code/nix-dotfiles/rocinante/dotfiles/matugen/config.toml";
+  #     "${config.home.homeDirectory}/code/nix-dotfiles/homelab-fleet/dotfiles/matugen/config.toml";
 
   # Run matugen at home-manager activation to (re)generate colors from the
   # current wallpaper. Guarded so it only runs when a wallpaper is set.

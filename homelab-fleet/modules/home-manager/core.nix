@@ -123,8 +123,8 @@
   };
   # NOTE: your common.nix also vendors opencode skills (caveman, smart-brevify)
   # from ./dotfiles/opencode/skills. Those live in the PARENT nix-dotfiles flake
-  # and are intentionally not referenced here so rocinante/ stays a
+  # and are intentionally not referenced here so homelab-fleet/ stays a
   # self-contained flake (a flake can only read files under its own root). If
-  # you want them here too, copy dotfiles/opencode/skills into rocinante/ and
+  # you want them here too, copy dotfiles/opencode/skills into homelab-fleet/ and
   # add an xdg.configFile."opencode/skills/<name>" = { source = ...; recursive = true; }.
 }

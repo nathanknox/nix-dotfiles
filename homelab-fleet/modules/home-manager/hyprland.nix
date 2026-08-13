@@ -32,8 +32,8 @@ let
   # Absolute path to the plaintext hypr dotfiles IN THE REPO working tree.
   # `mkOutOfStoreSymlink` needs a path on the live filesystem, so we build it
   # from the home directory + the repo location. Adjust `repoDir` if you clone
-  # this somewhere other than ~/code/nix-dotfiles/rocinante.
-  repoDir = "${config.home.homeDirectory}/code/nix-dotfiles/rocinante";
+  # this somewhere other than ~/code/nix-dotfiles/homelab-fleet.
+  repoDir = "${config.home.homeDirectory}/code/nix-dotfiles/homelab-fleet";
   hyprSrc = "${repoDir}/dotfiles/hypr";
 in
 lib.mkIf os.graphical.enable {

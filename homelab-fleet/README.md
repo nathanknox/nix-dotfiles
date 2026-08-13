@@ -154,4 +154,4 @@ this is a Linux/NixOS config.
 ## Version control
 
 This lives inside a colocated git+jj repo. Work is committed with `jj`, scoped
-to `rocinante/`, authored as `nathan.knox@gmail.com`.
+to `homelab-fleet/`, authored as `nathan.knox@gmail.com`.

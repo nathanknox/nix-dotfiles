@@ -17,15 +17,15 @@ waybar = true
 
 # --- Hyprland colors (mirrors what theme.nix generates on Route A) -----------
 [templates.hyprland]
-input_path = "~/code/nix-dotfiles/rocinante/dotfiles/matugen/hyprland-colors.conf"
+input_path = "~/code/nix-dotfiles/homelab-fleet/dotfiles/matugen/hyprland-colors.conf"
 output_path = "~/.config/hypr/colors.conf"
 
 # --- Waybar colors -----------------------------------------------------------
 [templates.waybar]
-input_path = "~/code/nix-dotfiles/rocinante/dotfiles/matugen/waybar-colors.css"
+input_path = "~/code/nix-dotfiles/homelab-fleet/dotfiles/matugen/waybar-colors.css"
 output_path = "~/.config/waybar/colors.css"
 
 # --- swaync colors -----------------------------------------------------------
 [templates.swaync]
-input_path = "~/code/nix-dotfiles/rocinante/dotfiles/matugen/swaync-colors.css"
+input_path = "~/code/nix-dotfiles/homelab-fleet/dotfiles/matugen/swaync-colors.css"
 output_path = "~/.config/swaync/colors.css"

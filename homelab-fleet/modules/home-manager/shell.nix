@@ -26,12 +26,12 @@ in
 
       # The rebuild helper (tonybanters `nrs`). Rebuilds THIS host from the
       # flake. `--flake .#<host>` picks the nixosConfiguration by hostname.
-      # Run it from inside the rocinante/ directory.
+      # Run it from inside the homelab-fleet/ directory.
       nrs = "sudo nixos-rebuild switch --flake .#${osConfig.networking.hostName}";
       # Update flake inputs (nixpkgs/home-manager) then you can `nrs`.
       nup = "nix flake update";
       # Quick edit of this config.
-      conf = "cd ~/code/nix-dotfiles/rocinante && $EDITOR .";
+      conf = "cd ~/code/nix-dotfiles/homelab-fleet && $EDITOR .";
     };
 
     # Belt-and-braces PATH for ~/.local/bin (uv tools, etc.), de-duplicated.
