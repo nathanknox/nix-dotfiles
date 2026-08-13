@@ -24,8 +24,8 @@
 #      imports (and, if you like, comment `./theme.nix` — though leaving the
 #      GTK/cursor scaffolding on is harmless).
 #   3. In your host (hosts/rocinante/default.nix): set
-#         rocinante.theme.matugen.enable = true;
-#         rocinante.theme.wallpaper = ./path/to/wallpaper.jpg;   # REQUIRED
+#         fleet.theme.matugen.enable = true;
+#         fleet.theme.wallpaper = ./path/to/wallpaper.jpg;   # REQUIRED
 #   4. Rebuild. matugen runs at activation to render color templates.
 # ------------------------------------------------------------------------------
 #

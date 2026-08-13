@@ -11,7 +11,7 @@
 #
 # The system half (PipeWire-JACK, musnix realtime) is in modules/nixos/audio.nix.
 # This installs the user-facing pro-audio applications, gated on the same
-# `rocinante.audio.enable` toggle so it's inert unless you opt in.
+# `fleet.audio.enable` toggle so it's inert unless you opt in.
 let
   os = osConfig.fleet;
 in

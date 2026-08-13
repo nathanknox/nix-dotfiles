@@ -31,12 +31,12 @@ in
     ./waybar.nix # status bar (omarchy-clean default; island variant commented)
     ./wofi.nix # application launcher
     ./terminal.nix # kitty (default), foot/alacritty commented
-    ./audio.nix # DAW/plugins/patchbay (guarded by rocinante.audio.enable)
+    ./audio.nix # DAW/plugins/patchbay (guarded by fleet.audio.enable)
 
     # --- ROUTE B (saneaspect Material-You), COMMENTED --------------------------
     # Uncomment this ONE import to switch theming from the static base16 route
     # to matugen's wallpaper-derived Material-You palette. Also set
-    # `rocinante.theme.matugen.enable = true` and a wallpaper in your host.
+    # `fleet.theme.matugen.enable = true` and a wallpaper in your host.
     # See the file header for the full switch checklist.
     # ./theme-matugen.nix
   ];

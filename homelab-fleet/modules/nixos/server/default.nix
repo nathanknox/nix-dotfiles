@@ -8,7 +8,7 @@
 # modules/nixos/server/default.nix — headless server services (tycho).
 # =============================================================================
 #
-# Guarded by `rocinante.server.enable`. This is the "minimal" server per the
+# Guarded by `fleet.server.enable`. This is the "minimal" server per the
 # plan: ONE media service (Jellyfin) is ACTIVE, plus Tailscale for private
 # remote access. Everything heavier (Navidrome, Immich, containers, Samba) is
 # present but commented in the sibling files so you can turn them on one at a
@@ -24,7 +24,7 @@ in
 {
   # `imports` MUST be unconditional — you cannot place it inside a `lib.mkIf`
   # (imports are resolved before `config` values are evaluated). Each sibling
-  # module self-guards on `rocinante.server.enable`, so importing them here is
+  # module self-guards on `fleet.server.enable`, so importing them here is
   # safe and inert on non-server hosts.
   imports = [
     ./media.nix # Navidrome/Immich examples (commented)

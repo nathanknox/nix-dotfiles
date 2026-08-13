@@ -100,7 +100,7 @@ nix develop           # dev shell: nil, nixfmt, statix, deadnix
    (commented in `modules/home-manager/hyprland.nix`):* fully declarative
    `wayland.windowManager.hyprland.settings`.
 3. **Theming** — *Route A (active):* static base16 registry (`themes/`,
-   `rocinante.theme.name`). *Route B (separate files):* saneaspect matugen
+   `fleet.theme.name`). *Route B (separate files):* saneaspect matugen
    Material-You — see the switch checklist at the top of
    `modules/home-manager/theme-matugen.nix`.
 4. **Login** — *active:* SDDM (pairs with saneaspect's `vitreous` theme).
@@ -111,17 +111,17 @@ nix develop           # dev shell: nil, nixfmt, statix, deadnix
 
 ## Pro-audio (opt-in)
 
-A modern Linux pro-audio stack is available behind `rocinante.audio.enable`:
+A modern Linux pro-audio stack is available behind `fleet.audio.enable`:
 - **PipeWire-JACK** low-latency server (`modules/nixos/audio.nix`) — JACK-native
   apps work alongside normal desktop audio.
 - **musnix** for realtime plumbing (PAM rtprio/memlock, udev rules, performance
   governor, plugin paths). The **PREEMPT_RT kernel** is a separate,
-  off-by-default toggle (`rocinante.audio.realtimeKernel`) since it rebuilds the
+  off-by-default toggle (`fleet.audio.realtimeKernel`) since it rebuilds the
   kernel; on 6.12+ musnix uses mainline PREEMPT_RT (no patch).
 - **Ardour** (+ qpwgraph patchbay, LV2/CLAP plugins) on the home side
   (`modules/home-manager/audio.nix`).
 
-Enable it in a host with `rocinante.audio.enable = true;` (rocinante's AMD GPU
+Enable it in a host with `fleet.audio.enable = true;` (rocinante's AMD GPU
 has no proprietary-driver friction, so it pairs well with realtime audio).
 
 ## nixpkgs channel note (26.05 vs RDNA4)

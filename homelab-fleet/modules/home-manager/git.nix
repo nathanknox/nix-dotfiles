@@ -9,7 +9,7 @@
 # modules/home-manager/git.nix — git + jujutsu (jj), identity from options.
 # =============================================================================
 #
-# Both VCS tools read identity from the shared `rocinante.user.*` options so
+# Both VCS tools read identity from the shared `fleet.user.*` options so
 # your name/email are defined once. jj is your primary VCS (colocated in git
 # repos); git is configured too for interop and tools that expect it.
 let

@@ -8,7 +8,7 @@
 # modules/nixos/graphical.nix — the Hyprland desktop (SYSTEM half).
 # =============================================================================
 #
-# Guarded by `rocinante.graphical.enable`. On tycho (headless) this whole file
+# Guarded by `fleet.graphical.enable`. On tycho (headless) this whole file
 # is inert. The SYSTEM half sets up the compositor, audio, fonts, portals, and
 # the login greeter. The LOOK of the desktop (bar, launcher, keybinds, theme)
 # is the HOME half — see modules/home-manager/hyprland.nix and friends.

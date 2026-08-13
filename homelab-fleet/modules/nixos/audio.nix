@@ -9,7 +9,7 @@
 # modules/nixos/audio.nix — the pro-audio stack (opt-in).
 # =============================================================================
 #
-# Guarded by `rocinante.audio.enable`. This is the 2026 "modern, well-supported"
+# Guarded by `fleet.audio.enable`. This is the 2026 "modern, well-supported"
 # Linux pro-audio baseline:
 #   * PipeWire as the server, with the JACK layer on (so JACK-native pro apps
 #     like Ardour "just work" alongside normal desktop audio).

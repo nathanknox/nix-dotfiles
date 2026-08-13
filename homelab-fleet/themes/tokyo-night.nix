@@ -5,7 +5,7 @@
     name = "tokyo-night";
     polarity = "dark"; # "dark" | "light" — drives GTK prefer-dark, etc.
     # Suggested wallpaper is intentionally null: static themes don't require
-    # one. Set rocinante.theme.wallpaper in your host to point hyprpaper at an
+    # one. Set fleet.theme.wallpaper in your host to point hyprpaper at an
     # image of your choosing.
   };
 

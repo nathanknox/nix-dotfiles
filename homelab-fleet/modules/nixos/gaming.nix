@@ -8,7 +8,7 @@
 # modules/nixos/gaming.nix — Steam + gamescope + gamemode (opt-in).
 # =============================================================================
 #
-# Guarded by `rocinante.gaming.enable`. On rocinante (AMD RX 9070 XT) this is a
+# Guarded by `fleet.gaming.enable`. On rocinante (AMD RX 9070 XT) this is a
 # smooth path: no proprietary drivers, and the graphics stack's `enable32Bit`
 # (set in gpu-amd.nix) is exactly what Steam needs.
 #

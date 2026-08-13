@@ -5,12 +5,12 @@
   ...
 }:
 # =============================================================================
-# modules/nixos/users.nix — declare the primary user from rocinante.user.*
+# modules/nixos/users.nix — declare the primary user from fleet.user.*
 # =============================================================================
 #
 # This is the vimjoyer "main-user" pattern: rather than hardcoding a username,
 # we read it from our option schema so the whole config is parameterized by
-# `rocinante.user.name`. Change the option in one place and the user, home
+# `fleet.user.name`. Change the option in one place and the user, home
 # directory, and home-manager wiring all follow.
 let
   cfg = config.fleet;

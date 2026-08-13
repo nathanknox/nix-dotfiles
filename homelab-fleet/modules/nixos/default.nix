@@ -12,11 +12,11 @@
     ../options.nix # the fleet.* schema (must be imported once)
 
     ./core.nix # nix settings, networking, locale, base packages (always on)
-    ./users.nix # the primary user, derived from rocinante.user.*
+    ./users.nix # the primary user, derived from fleet.user.*
 
-    ./graphical.nix # Hyprland desktop      (guarded by rocinante.graphical.enable)
-    ./gaming.nix # Steam/gamescope/etc.  (guarded by rocinante.gaming.enable)
-    ./audio.nix # PipeWire-JACK + musnix (guarded by rocinante.audio.enable)
+    ./graphical.nix # Hyprland desktop      (guarded by fleet.graphical.enable)
+    ./gaming.nix # Steam/gamescope/etc.  (guarded by fleet.gaming.enable)
+    ./audio.nix # PipeWire-JACK + musnix (guarded by fleet.audio.enable)
 
     ./gpu-amd.nix # AMD RDNA4 GPU (rocinante) — ACTIVE example
     # ./gpu-nvidia.nix   # NVIDIA GPU — ALTERNATIVE example, kept commented.
@@ -25,6 +25,6 @@
     ./dual-boot.nix # NixOS+Omarchy dual-boot (guarded by fleet.dualBoot.enable;
     #               # OFF by default, and device-specific bits stay commented)
 
-    ./server # headless services  (guarded by rocinante.server.enable)
+    ./server # headless services  (guarded by fleet.server.enable)
   ];
 }

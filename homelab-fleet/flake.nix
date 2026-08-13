@@ -87,7 +87,7 @@
     # Pro-audio: musnix is THE NixOS realtime-audio module (PREEMPT_RT kernel
     # config, realtime PAM limits, udev rules, plugin paths). Its NixOS module
     # is inert unless `musnix.enable = true`, so it's safe to always import.
-    # Only relevant when rocinante.audio.enable is set (see modules/nixos/audio.nix).
+    # Only relevant when fleet.audio.enable is set (see modules/nixos/audio.nix).
     musnix.url = "github:musnix/musnix";
   };
 
@@ -134,7 +134,7 @@
               home-manager.extraSpecialArgs = { inherit inputs hostName; };
               # The actual per-user home wiring lives in the HM aggregator.
               # `users.<name>` is set inside hosts/<host>/default.nix via the
-              # `rocinante.user.name` option so it stays declarative and DRY.
+              # `fleet.user.name` option so it stays declarative and DRY.
             }
           ];
         };
