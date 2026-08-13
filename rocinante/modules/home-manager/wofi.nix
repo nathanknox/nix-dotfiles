@@ -14,7 +14,7 @@
 # minimal popup — leans omarchy-clean, with a comment on making it more
 # saneaspect-rounded.
 let
-  os = osConfig.rocinante;
+  os = osConfig.fleet;
   themes = import ../../themes;
   t = themes.${os.theme.name};
   c = h: "#${h}";

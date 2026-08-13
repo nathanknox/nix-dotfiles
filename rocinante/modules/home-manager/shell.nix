@@ -9,7 +9,7 @@
 # modules/home-manager/shell.nix — zsh + starship prompt + aliases.
 # =============================================================================
 let
-  os = osConfig.rocinante;
+  os = osConfig.fleet;
 in
 {
   programs.zsh = {

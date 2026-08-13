@@ -11,7 +11,7 @@
 # The plan calls for a MINIMAL server: Jellyfin only (in server/default.nix).
 # These are the obvious next additions from your Home Lab notes — kept off so
 # you enable them deliberately. Uncomment a block, `nixos-rebuild switch`, done.
-lib.mkIf config.rocinante.server.enable {
+lib.mkIf config.fleet.server.enable {
   # --- Navidrome: lightweight music streaming server (Subsonic API) ----------
   # Great pairing with Jellyfin if you want a dedicated music experience.
   # services.navidrome = {

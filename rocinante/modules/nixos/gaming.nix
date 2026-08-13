@@ -16,7 +16,7 @@
 # (a full Steam Deck-like gamescope session, Proton-GE, MangoHud overlays,
 # low-latency kernels) are noted as commented extras so you can grow into them.
 let
-  cfg = config.rocinante;
+  cfg = config.fleet;
 in
 lib.mkIf cfg.gaming.enable {
   # Steam. `gamescopeSession` gives you a Steam Big Picture-style session you

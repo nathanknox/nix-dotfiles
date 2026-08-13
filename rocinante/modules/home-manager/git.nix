@@ -13,7 +13,7 @@
 # your name/email are defined once. jj is your primary VCS (colocated in git
 # repos); git is configured too for interop and tools that expect it.
 let
-  os = osConfig.rocinante;
+  os = osConfig.fleet;
 in
 {
   programs.git = {

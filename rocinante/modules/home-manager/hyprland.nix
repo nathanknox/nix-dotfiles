@@ -27,7 +27,7 @@
 #   type-checked, but every change needs a rebuild. Shown commented at the
 #   bottom so you can compare and switch when the rice stabilizes.
 let
-  os = osConfig.rocinante;
+  os = osConfig.fleet;
 
   # Absolute path to the plaintext hypr dotfiles IN THE REPO working tree.
   # `mkOutOfStoreSymlink` needs a path on the live filesystem, so we build it

@@ -11,7 +11,7 @@
 # Tailscale is ACTIVE (private mesh VPN: reach tycho from anywhere without
 # exposing ports to the internet — matches your Home Lab notes). Samba and
 # static/systemd-networkd addressing are COMMENTED examples.
-lib.mkIf config.rocinante.server.enable {
+lib.mkIf config.fleet.server.enable {
   # --- Tailscale (ACTIVE): zero-config private access to the server ----------
   # After first boot, run `sudo tailscale up` once to authenticate. The MS-01
   # then joins your tailnet and is reachable by its Tailscale name/IP.

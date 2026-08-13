@@ -10,12 +10,12 @@
 # =============================================================================
 #
 # `osConfig` is the NixOS system config, available because we run home-manager
-# AS a NixOS module (see flake.nix Route A). We read the shared `rocinante.*`
+# AS a NixOS module (see flake.nix Route A). We read the shared `fleet.*`
 # options from it so the home side stays in sync with the system side WITHOUT
 # duplicating values — e.g. the graphical toggle and the chosen theme.
 let
   # System-level rocinante options (username, theme, graphical toggle, ...).
-  os = osConfig.rocinante;
+  os = osConfig.fleet;
 in
 {
   imports = [
@@ -31,6 +31,7 @@ in
     ./waybar.nix # status bar (omarchy-clean default; island variant commented)
     ./wofi.nix # application launcher
     ./terminal.nix # kitty (default), foot/alacritty commented
+    ./audio.nix # DAW/plugins/patchbay (guarded by rocinante.audio.enable)
 
     # --- ROUTE B (saneaspect Material-You), COMMENTED --------------------------
     # Uncomment this ONE import to switch theming from the static base16 route
@@ -48,7 +49,7 @@ in
   # The home-manager release your config targets. Keep in sync with the system
   # stateVersion philosophy: set once, change deliberately after reading release
   # notes. Using a current value since this is a fresh config.
-  home.stateVersion = "25.05";
+  home.stateVersion = "26.05";
 
   # Let home-manager manage itself (so `home-manager` the tool is available and
   # the news/version machinery works).

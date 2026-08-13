@@ -32,7 +32,7 @@
 # This module self-guards on BOTH graphical.enable AND theme.matugen.enable so
 # that merely importing it does nothing until you flip the option.
 let
-  os = osConfig.rocinante;
+  os = osConfig.fleet;
 in
 lib.mkIf (os.graphical.enable && os.theme.matugen.enable) {
   # The matugen CLI (from the flake input). Uncomment the input in flake.nix

@@ -18,7 +18,7 @@
 #   2. You must opt into `modesetting` for Wayland to work at all.
 #   3. Newer GPUs prefer the `open` kernel modules.
 let
-  cfg = config.rocinante;
+  cfg = config.fleet;
 in
 lib.mkIf (cfg.graphical.enable && false) {
   # ^ `&& false` keeps this inert even if accidentally imported. Remove the

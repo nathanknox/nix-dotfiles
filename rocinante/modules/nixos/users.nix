@@ -13,7 +13,7 @@
 # `rocinante.user.name`. Change the option in one place and the user, home
 # directory, and home-manager wiring all follow.
 let
-  cfg = config.rocinante;
+  cfg = config.fleet;
 in
 {
   # Zsh is our login shell (configured in detail via home-manager). It must be

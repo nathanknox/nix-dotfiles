@@ -4,7 +4,7 @@
 # =============================================================================
 #
 # A host's job is small and declarative: import the shared module set, import
-# this machine's hardware + base system config, then set `rocinante.*` options
+# this machine's hardware + base system config, then set `fleet.*` options
 # to describe what THIS machine is. All the behavior lives in the shared
 # modules; the host just flips toggles and fills in identity.
 {
@@ -15,7 +15,7 @@
   ];
 
   # --- Describe this machine via the shared option schema --------------------
-  rocinante = {
+  fleet = {
     user = {
       name = "nknox";
       fullName = "Nathan Knox";

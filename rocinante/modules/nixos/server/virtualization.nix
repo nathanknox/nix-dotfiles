@@ -10,7 +10,7 @@
 #
 # From your Home Lab notes: tycho should host VMs/containers. Here are the two
 # common NixOS routes, both off by default. Pick one (or both) and uncomment.
-lib.mkIf config.rocinante.server.enable {
+lib.mkIf config.fleet.server.enable {
   # --- Containers: Podman (rootless, docker-compatible) ----------------------
   # Podman is the usual NixOS default (daemonless, rootless-friendly). The
   # `dockerCompat` alias makes `docker ...` commands work.

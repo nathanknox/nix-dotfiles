@@ -19,7 +19,7 @@
 #   transcoding in Jellyfin via VAAPI/QSV. That's the interesting teaching bit:
 #   a headless box still benefits from its integrated graphics.
 let
-  cfg = config.rocinante;
+  cfg = config.fleet;
 in
 {
   # `imports` MUST be unconditional — you cannot place it inside a `lib.mkIf`

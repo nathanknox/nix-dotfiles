@@ -27,7 +27,7 @@
   #                          dotfiles symlinked with mkOutOfStoreSymlink so you
   #                          can hot-edit + `hyprctl reload` without a rebuild.
   #   * omarchy / omarchy-nix -> a curated static theme registry (themes/) and
-  #                          an opinionated `options.rocinante.*` schema.
+  #                          an opinionated `options.fleet.*` schema.
   #   * saneaspect        -> the Material-You (matugen) "wallpaper drives the
   #                          palette" route + the rounded "island" Waybar look,
   #                          kept in SEPARATE files and enabled by uncommenting
@@ -40,9 +40,17 @@
     # nixpkgs channel choice — WHY unstable:
     #
     # rocinante's GPU is an AMD RX 9070 XT (RDNA4), which is very new hardware.
-    # RDNA4 needs a recent kernel + recent Mesa to work well. The stable NixOS
-    # release (e.g. nixos-25.05) can lag on brand-new GPUs, so we track
-    # nixos-unstable to stay close to upstream kernel/Mesa.
+    # RDNA4 needs a recent kernel + recent Mesa to work well. Stable NixOS
+    # releases can lag on brand-new GPUs, so we track nixos-unstable to stay
+    # close to upstream kernel/Mesa.
+    #
+    # NOTE on 26.05: you INSTALL from the NixOS 26.05 media and set
+    # `system.stateVersion = "26.05"` (already done in hosts/*/configuration.nix),
+    # but the channel you TRACK is independent of the install medium. We keep
+    # tracking `nixos-unstable` for RDNA4 freshness. If you'd rather pin the
+    # config to the 26.05 release channel, change the URL below to
+    # `github:NixOS/nixpkgs/nixos-26.05` and switch the home-manager input to
+    # `release-26.05` (see the home-manager note below) — those two MUST match.
     #
     # `nixos-unstable` (not `nixpkgs-unstable`) is the channel that Hydra has
     # already built AND passed the NixOS test suite on, so you still get cache
@@ -54,14 +62,16 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     # OPTIONAL stable channel, kept commented. A common pattern is to run the
-    # desktop on unstable (fresh GPU support) and a server on stable. If you
-    # adopt it, add `nixpkgs-stable` to the outputs function args and build
-    # tycho from `nixpkgs-stable.lib.nixosSystem` instead.
-    # nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-25.05";
+    # desktop on unstable (fresh GPU support) and a server (tycho) on the 26.05
+    # release. If you adopt it, add `nixpkgs-stable` to the outputs function args
+    # and build tycho from `nixpkgs-stable.lib.nixosSystem` instead.
+    # nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-26.05";
 
     # home-manager must track `master` to match nixpkgs `nixos-unstable`. The
     # `release-XX.YY` branches are pinned to their matching nixpkgs release;
     # pairing a release home-manager with unstable nixpkgs is unsupported.
+    # (If you switch nixpkgs to `nixos-26.05` above, switch this to
+    #  `github:nix-community/home-manager/release-26.05`.)
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -73,6 +83,12 @@
     # does not affect the build until referenced.
     #
     # matugen.url = "github:InioX/matugen";
+
+    # Pro-audio: musnix is THE NixOS realtime-audio module (PREEMPT_RT kernel
+    # config, realtime PAM limits, udev rules, plugin paths). Its NixOS module
+    # is inert unless `musnix.enable = true`, so it's safe to always import.
+    # Only relevant when rocinante.audio.enable is set (see modules/nixos/audio.nix).
+    musnix.url = "github:musnix/musnix";
   };
 
   outputs =
@@ -80,6 +96,7 @@
       self,
       nixpkgs,
       home-manager,
+      musnix,
       ...
     }@inputs:
     let
@@ -101,7 +118,7 @@
           specialArgs = { inherit inputs hostName; };
           modules = [
             # Host-specific entrypoint. It imports the shared modules it wants
-            # and sets `rocinante.*` options for this machine.
+            # and sets `fleet.*` options for this machine.
             ./hosts/${hostName}
 
             # ROUTE A (ACTIVE): home-manager as a NixOS module.

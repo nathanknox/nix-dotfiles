@@ -26,7 +26,7 @@
 #   to the latest by uncommenting `boot.kernelPackages` below and/or run
 #   `nix flake update` to pull a newer nixpkgs.
 let
-  cfg = config.rocinante;
+  cfg = config.fleet;
 in
 lib.mkIf cfg.graphical.enable {
   # Load amdgpu early (KMS) for a clean, flicker-free boot and proper Wayland.

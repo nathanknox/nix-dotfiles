@@ -24,5 +24,5 @@
   # For a server you often want to allow password auth OFF (default in core.nix)
   # and rely on keys — add your key in modules/nixos/users.nix authorizedKeys.
 
-  system.stateVersion = "25.05";
+  system.stateVersion = "26.05";
 }

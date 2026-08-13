@@ -26,6 +26,6 @@
 
   # This is the NixOS release this machine was first installed from. Set it to
   # the installer's version and then DO NOT change it (it governs stateful data
-  # defaults). Using 25.05 as a current baseline for a fresh install.
-  system.stateVersion = "25.05";
+  # defaults). Using 26.05 to match the NixOS 26.05 install media.
+  system.stateVersion = "26.05";
 }

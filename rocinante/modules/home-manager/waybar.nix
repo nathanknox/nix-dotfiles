@@ -20,7 +20,7 @@
 # desktop (Route A). Under the matugen route (Route B), swap the color source
 # to matugen's generated CSS (noted inline).
 let
-  os = osConfig.rocinante;
+  os = osConfig.fleet;
   themes = import ../../themes;
   t = themes.${os.theme.name};
 

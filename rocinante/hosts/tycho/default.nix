@@ -13,7 +13,7 @@
     ./hardware-configuration.nix
   ];
 
-  rocinante = {
+  fleet = {
     user = {
       name = "nknox";
       fullName = "Nathan Knox";

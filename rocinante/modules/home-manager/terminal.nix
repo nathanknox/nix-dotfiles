@@ -13,7 +13,7 @@
 # ALTERNATIVES (COMMENTED): foot (tonybanters) and alacritty (saneaspect).
 # Colors from the theme registry so the terminal matches the desktop.
 let
-  os = osConfig.rocinante;
+  os = osConfig.fleet;
   themes = import ../../themes;
   t = themes.${os.theme.name};
   c = h: "#${h}";

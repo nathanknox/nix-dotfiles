@@ -5,9 +5,14 @@
 #
 # This is the vimjoyer "custom options module" pattern and the omarchy-nix
 # "one central options schema" pattern combined. Instead of scattering magic
-# strings across modules, we declare a typed namespace `rocinante.*` ONCE here.
-# Every other module reads `config.rocinante.*` and each host writes to it in
+# strings across modules, we declare a typed namespace `fleet.*` ONCE here.
+# Every other module reads `config.fleet.*` and each host writes to it in
 # hosts/<host>/default.nix.
+#
+# NAMING: the namespace is `fleet` (not `rocinante`) on purpose. `rocinante` is
+# both the repo directory AND the desktop host, so naming the shared schema
+# after it would wrongly imply tycho depends on the rocinante host. `fleet.*`
+# reads as "settings for any machine in this fleet" — rocinante and tycho alike.
 #
 # WHY do this in a barebones config? Because it teaches the single most
 # important NixOS module concept: the split between `options` (the schema you
@@ -16,7 +21,7 @@
 # `server`) let one set of modules serve very different machines (desktop vs
 # headless server) without duplication.
 {
-  options.rocinante = {
+  options.fleet = {
     # --- Identity -------------------------------------------------------------
     user = {
       name = lib.mkOption {
@@ -42,6 +47,18 @@
     graphical.enable = lib.mkEnableOption "the Hyprland graphical desktop (bar, launcher, greeter)";
     gaming.enable = lib.mkEnableOption "gaming support (Steam, gamescope, gamemode)";
     server.enable = lib.mkEnableOption "headless server services (Jellyfin, tailscale, ...)";
+
+    # Pro-audio: PipeWire-JACK low-latency stack + musnix realtime tuning +
+    # a DAW/plugins. Off by default. See modules/nixos/audio.nix.
+    audio = {
+      enable = lib.mkEnableOption "the pro-audio stack (PipeWire-JACK, musnix realtime tuning, Ardour)";
+      realtimeKernel = lib.mkEnableOption ''
+        the PREEMPT_RT realtime kernel via musnix. Off by default because it
+        REBUILDS the kernel and can interact with GPU/gaming setups. On a modern
+        vanilla kernel PipeWire low-latency is usually enough; enable only if you
+        measure a need. On kernels >= 6.12 musnix uses mainline PREEMPT_RT (no patch).
+      '';
+    };
 
     # --- Theming --------------------------------------------------------------
     theme = {

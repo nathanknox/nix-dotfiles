@@ -13,7 +13,7 @@
 # the login greeter. The LOOK of the desktop (bar, launcher, keybinds, theme)
 # is the HOME half — see modules/home-manager/hyprland.nix and friends.
 let
-  cfg = config.rocinante;
+  cfg = config.fleet;
 in
 lib.mkIf cfg.graphical.enable {
   # ---------------------------------------------------------------------------

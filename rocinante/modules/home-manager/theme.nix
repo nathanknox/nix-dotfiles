@@ -24,7 +24,7 @@
 # the color-generation pieces (the matugen route writes its own colors). The
 # GTK/cursor scaffolding here is harmless either way.
 let
-  os = osConfig.rocinante;
+  os = osConfig.fleet;
 
   # Look up the active theme from the registry. `themes/default.nix` maps
   # name -> palette. This is where the enum in options.nix pays off: an invalid
@@ -37,7 +37,7 @@ in
 lib.mkIf os.graphical.enable {
   # ---------------------------------------------------------------------------
   # Export the active palette so sibling modules (waybar/wofi/terminal/hyprland)
-  # can read `config.rocinante._resolvedTheme` without re-importing the registry.
+  # can read `config.fleet._resolvedTheme` without re-importing the registry.
   # We stash it under a private, underscore-prefixed key to signal "internal".
   # ---------------------------------------------------------------------------
   # NOTE: home-manager doesn't have our `rocinante` options namespace by default
