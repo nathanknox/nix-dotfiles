@@ -60,6 +60,50 @@
       '';
     };
 
+    # --- Dual-boot (NixOS + Omarchy on rocinante) -----------------------------
+    # Off by default. When enabled, modules/nixos/dual-boot.nix wires in the
+    # NixOS SIDE of a two-disk, one-OS-per-disk dual-boot with a third shared
+    # data partition for games/media/music that NEITHER OS owns. See the vault
+    # note "Dual-booting NixOS and Omarchy on rocinante". The actual bootloader
+    # entry and mount are kept COMMENTED in that module until real UUIDs exist.
+    dualBoot = {
+      enable = lib.mkEnableOption ''
+        the NixOS side of a NixOS + Omarchy dual-boot (shared /data mount +
+        an optional systemd-boot entry for the other OS). Inert until you fill
+        in real device UUIDs in modules/nixos/dual-boot.nix.
+      '';
+
+      # The shared data partition (Steam library, ROMs, media, music). Declared
+      # as options so the mount is data-driven, but the mount itself stays
+      # commented in the module until you know the real UUID.
+      dataDevice = lib.mkOption {
+        type = lib.types.nullOr lib.types.str;
+        default = null;
+        example = "/dev/disk/by-uuid/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx";
+        description = ''
+          Device (prefer /dev/disk/by-uuid/...) of the shared /data partition
+          holding games/media/music. null = don't mount (the safe default).
+        '';
+      };
+      dataFsType = lib.mkOption {
+        type = lib.types.enum [
+          "ext4"
+          "btrfs"
+        ];
+        default = "ext4";
+        description = ''
+          Filesystem of the shared /data partition. ext4 = simplest and both
+          NixOS and Omarchy mount it read-write natively (recommended). btrfs =
+          snapshots/subvolumes but needs a consistent scheme across both distros.
+        '';
+      };
+      dataMountPoint = lib.mkOption {
+        type = lib.types.str;
+        default = "/data";
+        description = "Where the shared data partition mounts.";
+      };
+    };
+
     # --- Theming --------------------------------------------------------------
     theme = {
       # ROUTE A (omarchy-style): pick a curated, static base16 scheme by name.

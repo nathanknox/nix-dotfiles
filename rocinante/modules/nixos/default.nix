@@ -22,6 +22,9 @@
     # ./gpu-nvidia.nix   # NVIDIA GPU — ALTERNATIVE example, kept commented.
     #                    # Enable this (and disable gpu-amd) on an NVIDIA box.
 
+    ./dual-boot.nix # NixOS+Omarchy dual-boot (guarded by fleet.dualBoot.enable;
+    #               # OFF by default, and device-specific bits stay commented)
+
     ./server # headless services  (guarded by rocinante.server.enable)
   ];
 }
