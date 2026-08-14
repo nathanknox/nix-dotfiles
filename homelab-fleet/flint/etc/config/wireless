@@ -1,0 +1,62 @@
+# =============================================================================
+# /etc/config/wireless — SSID -> VLAN mapping (the Flint's edge over Deco)
+# =============================================================================
+# The Flint (OpenWrt) can bind each SSID to a tagged VLAN 'network'. Consumer
+# mesh (Deco) generally cannot — so we let Deco carry the whole-property
+# ROAMING SSIDs (trusted/guest) as dumb wired APs, and let the FLINT broadcast
+# the segmented SSIDs (IoT/cameras) that must be VLAN-tagged.
+#
+# radio0/radio1/radio2 map to bands (2.4/5/6 GHz) — confirm with `iw dev` /
+# LuCI on your unit. Keys are placeholders: set real WPA passphrases.
+# See Nate's Vault/Homelab Networking Guide.md ("Wi-Fi decision").
+
+config wifi-device 'radio0'
+	option type 'mac80211'
+	option channel 'auto'
+	option band '5g'
+	option htmode 'EHT160'      # Wi-Fi 7 320/160 depending on region
+	# option disabled '0'
+
+config wifi-device 'radio1'
+	option type 'mac80211'
+	option channel 'auto'
+	option band '2g'
+	option htmode 'EHT40'
+
+# --- TRUSTED SSID (5GHz), VLAN 10. If Deco covers trusted, you can disable ----
+config wifi-iface 'wifi_trusted'
+	option device 'radio0'
+	option mode 'ap'
+	option ssid 'Home'
+	option encryption 'sae-mixed'   # WPA3/WPA2 transitional
+	option key 'CHANGE_ME_TRUSTED'
+	option network 'trusted'
+
+# --- IoT SSID (2.4GHz — most IoT is 2.4-only), VLAN 30 ------------------------
+config wifi-iface 'wifi_iot'
+	option device 'radio1'
+	option mode 'ap'
+	option ssid 'Home-IoT'
+	option encryption 'psk2'
+	option key 'CHANGE_ME_IOT'
+	option network 'iot'
+
+# --- CAMERAS SSID (2.4GHz), VLAN 40, client isolation on --------------------
+config wifi-iface 'wifi_cam'
+	option device 'radio1'
+	option mode 'ap'
+	option ssid 'Home-Cams'
+	option encryption 'psk2'
+	option key 'CHANGE_ME_CAMS'
+	option network 'cameras'
+	option isolate '1'              # cam clients can't talk to each other
+
+# --- GUEST SSID (5GHz), VLAN 50 ---------------------------------------------
+config wifi-iface 'wifi_guest'
+	option device 'radio0'
+	option mode 'ap'
+	option ssid 'Home-Guest'
+	option encryption 'sae-mixed'
+	option key 'CHANGE_ME_GUEST'
+	option network 'guest'
+	option isolate '1'

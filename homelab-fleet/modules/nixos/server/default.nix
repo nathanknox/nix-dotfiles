@@ -30,6 +30,7 @@ in
     ./media.nix # Navidrome/Immich examples (commented)
     ./virtualization.nix # podman/libvirt (commented)
     ./networking.nix # samba/static-net (commented) + tailscale (active)
+    ./router.nix # declarative VLAN router (Rung 3a) — inert until fleet.server.router.enable
   ];
 
   # Only the actual configuration values are conditional.

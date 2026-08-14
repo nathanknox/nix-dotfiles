@@ -1,0 +1,54 @@
+# =============================================================================
+# /etc/config/dhcp — one DHCP pool per VLAN; hand out Pi-hole as DNS
+# =============================================================================
+# dhcp_option '6,<ip>' sets the DNS server offered to clients. We point every
+# VLAN at the Pi-hole on the servers VLAN (10.0.20.53) so ad-blocking + local
+# name resolution work network-wide. See flint/README.md.
+
+# dnsmasq base (usually pre-existing). The Flint forwards DNS itself, but we
+# override the advertised resolver per-pool below.
+config dnsmasq
+	option domainneeded '1'
+	option localise_queries '1'
+	option rebind_protection '1'
+	option local '/lan/'
+	option domain 'lan'
+	option expandhosts '1'
+	option authoritative '1'
+	option readethers '1'
+
+config dhcp 'trusted'
+	option interface 'trusted'
+	option start '50'
+	option limit '150'
+	option leasetime '12h'
+	list dhcp_option '6,10.0.20.53'
+
+config dhcp 'servers'
+	option interface 'servers'
+	option start '50'
+	option limit '100'
+	option leasetime '12h'
+	list dhcp_option '6,10.0.20.53'
+
+config dhcp 'iot'
+	option interface 'iot'
+	option start '50'
+	option limit '150'
+	option leasetime '12h'
+	list dhcp_option '6,10.0.20.53'
+
+config dhcp 'cameras'
+	option interface 'cameras'
+	option start '50'
+	option limit '50'
+	option leasetime '12h'
+	list dhcp_option '6,10.0.20.53'
+
+config dhcp 'guest'
+	option interface 'guest'
+	option start '50'
+	option limit '150'
+	option leasetime '4h'
+	# Guests use the router itself for DNS (keeps them off internal Pi-hole):
+	list dhcp_option '6,10.0.50.1'

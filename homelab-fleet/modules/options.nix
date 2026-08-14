@@ -48,6 +48,19 @@
     gaming.enable = lib.mkEnableOption "gaming support (Steam, gamescope, gamemode)";
     server.enable = lib.mkEnableOption "headless server services (Jellyfin, tailscale, ...)";
 
+    # Declarative router (Rung 3a): make this host the actual VLAN
+    # router/firewall/DHCP via systemd-networkd + nftables + kea. OFF by default
+    # and, even when on, the guts stay COMMENTED in router.nix — it is a big,
+    # network-severing change you opt into deliberately. The Flint 3 is the
+    # active router today (see flint/); this is the "graduate tycho into the
+    # router" path documented in Nate's Vault/Homelab Networking Guide.md.
+    server.router.enable = lib.mkEnableOption ''
+      the fully declarative NixOS router stack (systemd-networkd VLANs + nftables
+      firewall + kea DHCP). Endgame "router as code" — inert scaffold in
+      modules/nixos/server/router.nix; requires two NICs (WAN + trunk) and
+      replaces the Flint 3 as the gateway. Leave OFF unless you mean it.
+    '';
+
     # Pro-audio: PipeWire-JACK low-latency stack + musnix realtime tuning +
     # a DAW/plugins. Off by default. See modules/nixos/audio.nix.
     audio = {

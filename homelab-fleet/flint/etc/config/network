@@ -1,0 +1,79 @@
+# =============================================================================
+# /etc/config/network — GL.iNet Flint 3 (OpenWrt) VLANs + per-VLAN L3 legs
+# =============================================================================
+# Template. Device/port names depend on your unit's DSA switch topology — run
+# `ip link` and `swconfig list` / check LuCI to confirm before pushing.
+# See flint/README.md and Nate's Vault/Homelab VLAN & Nix Reference.md.
+
+# --- Loopback + globals (usually pre-existing; shown for completeness) --------
+config interface 'loopback'
+	option device 'lo'
+	option proto 'static'
+	option ipaddr '127.0.0.1'
+	option netmask '255.0.0.0'
+
+# --- WAN: uplink to the ISP modem (put the modem in bridge mode) --------------
+config interface 'wan'
+	option device 'wan'         # the dedicated 2.5G WAN port
+	option proto 'dhcp'
+
+# --- Bridge VLANs: turn the LAN switch into 5 isolated segments ---------------
+# lanN:u* = untagged (access) member for that VLAN's device.
+# lan4:t  = tagged (trunk) member carrying ALL VLANs to the managed switch.
+config bridge-vlan
+	option device 'br-lan'
+	option vlan '10'
+	list ports 'lan1:u*'        # TRUSTED access port
+	list ports 'lan4:t'         # trunk
+
+config bridge-vlan
+	option device 'br-lan'
+	option vlan '20'
+	list ports 'lan2:u*'        # SERVERS access port (tycho / Pi-hole)
+	list ports 'lan4:t'
+
+config bridge-vlan
+	option device 'br-lan'
+	option vlan '30'
+	list ports 'lan4:t'         # IoT — reached via Wi-Fi (see wireless) + trunk
+
+config bridge-vlan
+	option device 'br-lan'
+	option vlan '40'
+	list ports 'lan4:t'         # CAMERAS — trunk only, WAN blocked in firewall
+
+config bridge-vlan
+	option device 'br-lan'
+	option vlan '50'
+	list ports 'lan4:t'         # GUEST — trunk only
+
+# --- One L3 interface per VLAN = the router's gateway IP on each subnet -------
+config interface 'trusted'
+	option proto 'static'
+	option device 'br-lan.10'
+	option ipaddr '10.0.10.1'
+	option netmask '255.255.255.0'
+
+config interface 'servers'
+	option proto 'static'
+	option device 'br-lan.20'
+	option ipaddr '10.0.20.1'
+	option netmask '255.255.255.0'
+
+config interface 'iot'
+	option proto 'static'
+	option device 'br-lan.30'
+	option ipaddr '10.0.30.1'
+	option netmask '255.255.255.0'
+
+config interface 'cameras'
+	option proto 'static'
+	option device 'br-lan.40'
+	option ipaddr '10.0.40.1'
+	option netmask '255.255.255.0'
+
+config interface 'guest'
+	option proto 'static'
+	option device 'br-lan.50'
+	option ipaddr '10.0.50.1'
+	option netmask '255.255.255.0'

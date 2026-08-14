@@ -1,0 +1,123 @@
+# =============================================================================
+# /etc/config/firewall — default-deny between VLANs + explicit allow-holes
+# =============================================================================
+# Model: each VLAN is its own zone. forward='REJECT' inside every zone means no
+# inter-VLAN traffic by default. We then ADD only the crossings we want. This is
+# the "default-deny" posture from Nate's Vault/Homelab Networking Guide.md.
+#
+# The "one-way camera" trick: cameras get NO forwarding rule of their own, so
+# they can never INITIATE traffic to other zones or the internet. The NVR on
+# the servers zone is allowed to reach them (RTSP), and conntrack auto-allows
+# the return packets. That is "one-way" in the way that matters.
+
+config defaults
+	option syn_flood '1'
+	option input 'ACCEPT'
+	option output 'ACCEPT'
+	option forward 'REJECT'
+
+# --- Zones -------------------------------------------------------------------
+config zone
+	option name 'trusted'
+	list network 'trusted'
+	option input 'ACCEPT'
+	option output 'ACCEPT'
+	option forward 'REJECT'
+
+config zone
+	option name 'servers'
+	list network 'servers'
+	option input 'REJECT'
+	option output 'ACCEPT'
+	option forward 'REJECT'
+
+config zone
+	option name 'iot'
+	list network 'iot'
+	option input 'REJECT'
+	option output 'ACCEPT'
+	option forward 'REJECT'
+
+config zone
+	option name 'cameras'
+	list network 'cameras'
+	option input 'REJECT'
+	option output 'ACCEPT'
+	option forward 'REJECT'
+
+config zone
+	option name 'guest'
+	list network 'guest'
+	option input 'REJECT'
+	option output 'ACCEPT'
+	option forward 'REJECT'
+
+config zone
+	option name 'wan'
+	list network 'wan'
+	option input 'REJECT'
+	option output 'ACCEPT'
+	option forward 'REJECT'
+	option masq '1'
+	option mtu_fix '1'
+
+# --- WAN access: everyone EXCEPT cameras -------------------------------------
+config forwarding
+	option src 'trusted'
+	option dest 'wan'
+config forwarding
+	option src 'servers'
+	option dest 'wan'
+config forwarding
+	option src 'iot'
+	option dest 'wan'
+config forwarding
+	option src 'guest'
+	option dest 'wan'
+# NOTE: intentionally NO 'cameras -> wan' forwarding = cameras have no internet.
+# (Wyze caveat: if you must let cams reach Wyze auth, replace this with a
+#  narrow rule to the specific auth hosts only — see the guide's camera section.)
+
+# --- Trusted can reach all internal VLANs ------------------------------------
+config forwarding
+	option src 'trusted'
+	option dest 'servers'
+config forwarding
+	option src 'trusted'
+	option dest 'iot'
+config forwarding
+	option src 'trusted'
+	option dest 'cameras'
+
+# --- Home Assistant / services (servers) -> IoT control ----------------------
+config forwarding
+	option src 'servers'
+	option dest 'iot'
+
+# --- The stateful 'one-way' camera rule: NVR (servers) -> cameras RTSP only ---
+config rule
+	option name 'NVR-pull-cameras-RTSP'
+	option src 'servers'
+	option dest 'cameras'
+	option proto 'tcp'
+	option dest_port '554 8554'
+	option target 'ACCEPT'
+# Return traffic auto-allowed by conntrack. Cameras still cannot INITIATE.
+
+# --- Let every VLAN reach Pi-hole DNS on the servers VLAN --------------------
+config rule
+	option name 'Allow-DNS-to-pihole'
+	option src '*'
+	option dest 'servers'
+	option dest_ip '10.0.20.53'
+	option proto 'tcpudp'
+	option dest_port '53'
+	option target 'ACCEPT'
+
+# --- Allow DHCP + DNS to the router itself from all zones (input) ------------
+config rule
+	option name 'Allow-dhcp-dns-input'
+	option src '*'
+	option proto 'udp'
+	option dest_port '67 68 53'
+	option target 'ACCEPT'
