@@ -242,15 +242,21 @@
     enableZshIntegration = true;
   };
 
+  # tmux config is vendored in this repo (dotfiles/tmux/tmux.conf) and sourced
+  # from the Home Manager-managed path. It used to live in the separate, now
+  # retired ~/code/nix-config repo; when that checkout was deleted the
+  # source-file line pointed at nothing and the config silently vanished.
+  # Keeping the file in-repo makes it self-contained and reproducible.
   programs.tmux = {
     enable = true;
     clock24 = true;
     baseIndex = 1;
     keyMode = "vi";
     extraConfig = ''
-      source-file ~/code/nix-config/tmux.conf
+      source-file ${config.xdg.configHome}/tmux/tmux.conf.local
     '';
   };
+  xdg.configFile."tmux/tmux.conf.local".source = ./dotfiles/tmux/tmux.conf;
 
   programs.uv = {
     enable = true;
